@@ -1,0 +1,19 @@
+.card-grid {
+  @apply py-12 px-8;
+}
+
+.card-grid__zone {
+  @apply grid gap-6 justify-items-center max-w-5xl mx-auto;
+}
+
+.card-grid__zone--2 {
+  @apply grid-cols-2;
+}
+
+.card-grid__zone--3 {
+  @apply grid-cols-3;
+}
+
+.card-grid__zone--4 {
+  @apply grid-cols-4;
+}

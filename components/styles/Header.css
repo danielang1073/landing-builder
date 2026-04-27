@@ -1,0 +1,31 @@
+.header {
+  @apply bg-gradient-to-b from-primary-950 to-primary-800 px-5 md:px-10 py-3 flex flex-wrap items-center justify-between gap-y-2;
+}
+
+.header__logos {
+  @apply flex items-center gap-3;
+}
+
+.header__logo {
+  @apply h-10 md:h-14 object-contain;
+}
+
+.header__nav {
+  @apply hidden md:flex items-center gap-2 lg:gap-3 order-3 md:order-2 w-full md:w-auto justify-center;
+}
+
+.header__nav-link {
+  @apply bg-[#2c536e] flex items-center gap-2 border border-white/40 text-white text-xs lg:text-sm px-3 lg:px-5 py-2 rounded-md hover:bg-white/10 transition-colors whitespace-nowrap;
+}
+
+.header__phone {
+  @apply text-white text-right order-2 md:order-3;
+}
+
+.header__phone-label {
+  @apply text-xs text-white/70;
+}
+
+.header__phone-number {
+  @apply text-base md:text-xl font-bold;
+}
