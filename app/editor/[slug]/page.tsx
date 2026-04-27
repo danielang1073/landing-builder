@@ -22,8 +22,20 @@ export default function EditorPage() {
     );
     if (!confirmed) return;
     await fetch(`/api/pages/${slug}`, { method: "DELETE" });
-    alert("Página eliminada.");
     router.push("/");
+  }
+
+  async function handleDuplicate() {
+    const newSlug = window.prompt("Slug para la página duplicada:", `${slug}-copia`);
+    if (!newSlug) return;
+    const res = await fetch("/api/pages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sourceSlug: slug, newSlug: newSlug.trim() }),
+    });
+    const json = await res.json();
+    if (!res.ok) { alert(json.error || "Error al duplicar"); return; }
+    router.push(`/editor/${newSlug.trim()}`);
   }
 
   if (!data) return <div className="p-8">Cargando...</div>;
@@ -44,6 +56,22 @@ export default function EditorPage() {
           <>
             <button
               type="button"
+              onClick={handleDuplicate}
+              style={{
+                background: "transparent",
+                border: "1px solid #a1a1aa",
+                color: "#a1a1aa",
+                borderRadius: "4px",
+                padding: "6px 14px",
+                fontSize: "13px",
+                cursor: "pointer",
+                marginRight: "8px",
+              }}
+            >
+              Duplicar
+            </button>
+            <button
+              type="button"
               onClick={handleDelete}
               style={{
                 background: "transparent",
@@ -56,7 +84,7 @@ export default function EditorPage() {
                 marginRight: "8px",
               }}
             >
-              Eliminar página
+              Eliminar
             </button>
             {children}
           </>
