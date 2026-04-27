@@ -15,6 +15,7 @@ model Page {
   metaTitle       String?
   metaDescription String?
   ogImage         String?
+  isTemplate      Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../";
 @import "../components/styles/Card.css";
 @import "../components/styles/CardGrid.css";
 @import "../components/styles/Header.css";
@@ -17,6 +18,9 @@
 }
 
 @theme {
+  --color-primary-100: #E3EBF6;
+  --color-primary-500: #6F8CC0;
+  --color-primary-700: #436692;
   --color-primary-950: #002E4E;
   --color-primary-800: #2C547C;
 }

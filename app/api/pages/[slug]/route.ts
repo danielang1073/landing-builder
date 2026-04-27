@@ -31,6 +31,19 @@ export async function PUT(
   return NextResponse.json(page);
 }
 
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+  const { isTemplate } = await req.json();
+  const page = await prisma.page.update({
+    where: { slug },
+    data: { isTemplate },
+  });
+  return NextResponse.json(page);
+}
+
 export async function DELETE(
   _: NextRequest,
   { params }: { params: Promise<{ slug: string }> }

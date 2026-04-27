@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(wsl -d Ubuntu -e bash -c \"cd ~/landing-builder && npx prisma migrate dev --name add_template_flag 2>&1\")"
+    ]
+  }
+}
