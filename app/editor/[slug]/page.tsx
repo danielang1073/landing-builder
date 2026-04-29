@@ -4,6 +4,7 @@ import "@puckeditor/core/puck.css";
 import { puckConfig } from "@/registry/puck.config";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import AIFloatingButton from "@/components/AIFloatingButton";
 
 export default function EditorPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -65,83 +66,85 @@ export default function EditorPage() {
       config={puckConfig}
       data={data}
       onPublish={async (newData) => {
-        await fetch(`/api/pages/${slug}`, {
-          method: "PUT",
-          body: JSON.stringify({ title: slug, data: newData }),
-        });
-        alert("Published!");
-      }}
-      overrides={{
-        headerActions: ({ children }) => (
-          <>
-            <button
-              type="button"
-              onClick={() => router.push("/")}
-              style={{
-                background: "transparent",
-                border: "1px solid #a1a1aa",
-                color: "#a1a1aa",
-                borderRadius: "4px",
-                padding: "6px 14px",
-                fontSize: "13px",
-                cursor: "pointer",
-                marginRight: "8px",
-              }}
-            >
-              ← Dashboard
-            </button>
-            <button
-              type="button"
-              onClick={handleToggleTemplate}
-              style={{
-                background: isTemplate ? "#6F8CC0" : "transparent",
-                border: "1px solid #6F8CC0",
-                color: isTemplate ? "#fff" : "#6F8CC0",
-                borderRadius: "4px",
-                padding: "6px 14px",
-                fontSize: "13px",
-                cursor: "pointer",
-                marginRight: "8px",
-              }}
-            >
-              {isTemplate ? "✓ Template" : "Save as template"}
-            </button>
-            <button
-              type="button"
-              onClick={handleDuplicate}
-              style={{
-                background: "transparent",
-                border: "1px solid #6F8CC0",
-                color: "#6F8CC0",
-                borderRadius: "4px",
-                padding: "6px 14px",
-                fontSize: "13px",
-                cursor: "pointer",
-                marginRight: "8px",
-              }}
-            >
-              Duplicate
-            </button>
-            <button
-              type="button"
-              onClick={handleDelete}
-              style={{
-                background: "transparent",
-                border: "1px solid #f87171",
-                color: "#f87171",
-                borderRadius: "4px",
-                padding: "6px 14px",
-                fontSize: "13px",
-                cursor: "pointer",
-                marginRight: "8px",
-              }}
-            >
-              Delete
-            </button>
-            {children}
-          </>
-        ),
-      }}
+          await fetch(`/api/pages/${slug}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title: slug, data: newData }),
+          });
+          alert("Published!");
+        }}
+        overrides={{
+          headerActions: ({ children }) => (
+            <>
+              <AIFloatingButton />
+              <button
+                type="button"
+                onClick={() => router.push("/")}
+                style={{
+                  background: "transparent",
+                  border: "1px solid #a1a1aa",
+                  color: "#a1a1aa",
+                  borderRadius: "4px",
+                  padding: "6px 14px",
+                  fontSize: "13px",
+                  cursor: "pointer",
+                  marginRight: "8px",
+                }}
+              >
+                ← Dashboard
+              </button>
+              <button
+                type="button"
+                onClick={handleToggleTemplate}
+                style={{
+                  background: isTemplate ? "#6F8CC0" : "transparent",
+                  border: "1px solid #6F8CC0",
+                  color: isTemplate ? "#fff" : "#6F8CC0",
+                  borderRadius: "4px",
+                  padding: "6px 14px",
+                  fontSize: "13px",
+                  cursor: "pointer",
+                  marginRight: "8px",
+                }}
+              >
+                {isTemplate ? "✓ Template" : "Save as template"}
+              </button>
+              <button
+                type="button"
+                onClick={handleDuplicate}
+                style={{
+                  background: "transparent",
+                  border: "1px solid #6F8CC0",
+                  color: "#6F8CC0",
+                  borderRadius: "4px",
+                  padding: "6px 14px",
+                  fontSize: "13px",
+                  cursor: "pointer",
+                  marginRight: "8px",
+                }}
+              >
+                Duplicate
+              </button>
+              <button
+                type="button"
+                onClick={handleDelete}
+                style={{
+                  background: "transparent",
+                  border: "1px solid #f87171",
+                  color: "#f87171",
+                  borderRadius: "4px",
+                  padding: "6px 14px",
+                  fontSize: "13px",
+                  cursor: "pointer",
+                  marginRight: "8px",
+                }}
+              >
+                Delete
+              </button>
+              {children}
+            </>
+          ),
+        }}
     />
   );
 }
