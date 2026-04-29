@@ -71,7 +71,7 @@ export default function EditorPage() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title: slug, data: newData }),
           });
-          alert("Published!");
+          router.push("/");
         }}
         overrides={{
           headerActions: ({ children }) => (
