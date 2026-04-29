@@ -14,13 +14,15 @@ type Props = {
 export const puckConfig: Config<Props> = {
   root: {
     fields: {
-      metaTitle: { type: "text", label: "SEO — Meta título" },
-      metaDescription: { type: "textarea", label: "SEO — Meta descripción" },
-      ogImage: { type: "text", label: "SEO — URL imagen Open Graph" },
+      metaTitle: { type: "text", label: "SEO — Meta Title" },
+      metaDescription: { type: "textarea", label: "SEO — Meta Description" },
+      ogTitle: { type: "text", label: "SEO — OG Title" },
+      ogImage: { type: "text", label: "SEO — OG Image URL" },
     },
     defaultProps: {
       metaTitle: "",
       metaDescription: "",
+      ogTitle: "",
       ogImage: "",
     },
   },
