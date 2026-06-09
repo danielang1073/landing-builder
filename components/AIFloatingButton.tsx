@@ -59,7 +59,7 @@ function buildPuckData(components: AnalyzedComponent[]) {
     const meta = componentRegistry[comp.type];
     if (meta?.zone) {
       const { name: zoneName, allow } = meta.zone;
-      const zoneItems = comp[zoneName];
+      const zoneItems = (comp as Record<string, unknown>)[zoneName];
       if (Array.isArray(zoneItems) && zoneItems.length > 0) {
         const childType = allow[0];
         const childDefaults = componentRegistry[childType]?.defaultProps ?? {};
@@ -225,7 +225,7 @@ export default function AIFloatingButton() {
   const componentLabel = (c: AnalyzedComponent) => {
     const meta = componentRegistry[c.type];
     if (meta?.zone) {
-      const items = c[meta.zone.name];
+      const items = (c as Record<string, unknown>)[meta.zone.name];
       const count = Array.isArray(items) ? items.length : 0;
       const colInfo = c.props.columns ? ` — ${c.props.columns} cols` : "";
       return `${c.type}${colInfo}${count ? `, ${count} ${meta.zone.name}` : ""}`;
